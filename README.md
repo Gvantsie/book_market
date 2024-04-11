@@ -88,7 +88,6 @@ The `book detail page` displays detailed information about a single book. The pa
 
 ### Endpoints
 The app provides endpoints:
-http://localhost:8000/ - Home page View
-http://localhost:8000/book/ - Book Catalog View
-http://localhost:8000/api/book/<int:pk>/ - Book Detail View
-http://localhost:8000/admin/ - Admin Interface
+- http://localhost:8000/book/ - Book Catalog View
+- http://localhost:8000/api/book/<int:pk>/ - Book Detail View
+- http://localhost:8000/admin/ - Admin Interface
