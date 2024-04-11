@@ -4,15 +4,15 @@ from django.utils.translation import gettext as _
 
 # Create your models here.
 class Book(models.Model):
-    title = models.CharField(max_length=100, verbose_name=_("Title"))
-    author = models.CharField(max_length=100, verbose_name=_("Author"))
+    title = models.CharField(verbose_name=_("Title"), max_length=100)
+    author = models.CharField(verbose_name=_("Author"), max_length=100)
     description = models.TextField(verbose_name=_("Description"))
-    best_seller = models.BooleanField(default=False, verbose_name=_("Best Seller"))
-    age_group = models.CharField(max_length=50, verbose_name=_("Age Group"))
-    category = models.CharField(max_length=50, verbose_name=_("Category"))
-    price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_("Price"))
+    best_seller = models.BooleanField(verbose_name=_("Best Seller"), default=False)
+    age_group = models.CharField(verbose_name=_("Age Group"), max_length=50)
+    category = models.CharField(verbose_name=_("Category"), max_length=50)
+    price = models.DecimalField(verbose_name=_("Price"), max_digits=5, decimal_places=2)
     stock = models.IntegerField(verbose_name=_("Stock"))
-    media = models.ImageField(upload_to='media/', null=True, blank=True, verbose_name=_("Media"))
+    cover = models.ImageField(verbose_name=_("Media"), upload_to='covers/', null=True, blank=True)
 
     def __str__(self):
         return self.title

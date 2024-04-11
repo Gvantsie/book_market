@@ -28,8 +28,8 @@ SECRET_KEY = 'django-insecure-e4pz%1hi2w3y73i^@94@y(a91+2p0j%azt!8vhj&uka&%rib)j
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'gvanca.pythonanywhere.com',
     'localhost',
+    '127.0.0.1',
 ]
 
 
@@ -105,8 +105,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = 'media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = 'covers/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -132,9 +132,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'media',
+    BASE_DIR / 'static',
 ]
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

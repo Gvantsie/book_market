@@ -2,9 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from market.models import Book
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+
 # Create your views here.
-
-
 def home(request):
     return render(request, 'home.html')
 

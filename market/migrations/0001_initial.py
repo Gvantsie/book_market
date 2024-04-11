@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('category', models.CharField(max_length=50)),
                 ('price', models.DecimalField(decimal_places=2, max_digits=5)),
                 ('stock', models.IntegerField()),
-                ('cover', models.ImageField(blank=True, null=True, upload_to='media/')),
+                ('cover', models.ImageField(blank=True, null=True, upload_to='media/covers/')),
             ],
         ),
     ]
