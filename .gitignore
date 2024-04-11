@@ -1,9 +1,32 @@
-__pycache__
-.idea/
-.venv/
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local development settings
+.env
+/.vscode
+/.idea
+/.vs
+
+# Compiled Python bytecode
 *.pyc
-.vscode/
-*.log
+*.pyo
+__pycache__
+
+# Temporary files
 *.swp
-*.swo
-*.swn
+*.~
+*~
+
+# Static files
+/staticfiles/
+
+# Media files
+/media/
+
+# Database files
+*.sqlite3
+
+# macOS directory attributes
+.DS_Store
