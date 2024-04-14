@@ -102,7 +102,7 @@
     <div class="container">
         {% for book in books %}
         <div class="book">
-            <img src="/{{ book.cover }}" alt=" ">
+            <img src="/media/{{ book.cover }}" alt=" ">
             <a href="/book_detail/{{ book.id }}/"><h2>{{ book.title }}</h2></a>
             <p><strong>Author:</strong> {{ book.author }}</p>
             <p><strong>Category:</strong> {{ book.category }}</p>

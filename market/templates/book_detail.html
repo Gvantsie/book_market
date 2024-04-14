@@ -58,7 +58,7 @@
     <div class="container">
         <div class="book-details">
             <h2>{{ book.title }}</h2>
-            <img class="book-cover" src="/{{ book.cover }}" alt=" ">
+            <img class="book-cover" src="/media/{{ book.cover }}" alt=" ">
             <p><strong>Author:</strong> {{ book.author }}</p>
             <p><strong>Description:</strong> {{ book.description }}</p>
             <p><strong>Best Seller:</strong> {% if book.best_seller %} Yes {% else %} No {% endif %}</p>
