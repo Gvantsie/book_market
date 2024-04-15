@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from market.models import Book, Category
+from market.models import Book, Category, Author
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -38,3 +38,16 @@ def filtered_books(request):
         books = books.filter(categories=selected_category)
 
     return render(request, 'filtered_books.html', {'books': books, 'selected_category': selected_category})
+
+
+def filtered_authors(request):
+    author_id = request.GET.get('author_id')
+    selected_author = None
+    books = Book.objects.all()
+    authors = Author.objects.all()
+
+    if author_id:
+        selected_author = Author.objects.get(pk=author_id)
+        books = books.filter(author=selected_author)
+
+    return render(request, 'filtered_authors.html', {'books': books, 'selected_author': selected_author, 'authors': authors})
