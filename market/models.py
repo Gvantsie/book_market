@@ -20,7 +20,7 @@ class Author(models.Model):
 
 
 class Category(models.Model):
-    id = models.AutoField(primary_key=True)
+    # id = models.AutoField(primary_key=True)
     category_name = models.CharField(verbose_name=_("Category Name"), max_length=50)
 
     def __str__(self):
