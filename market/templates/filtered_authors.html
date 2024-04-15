@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books by Category</title>
+    <title>Books by Author</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -57,11 +57,11 @@
 </head>
 <body>
     <div class="container">
-        <h1>Books in Category: {{ selected_category.category_name }}</h1>
+        <h1>Books by Author: {{ selected_author.first_name }} {{ selected_author.last_name }}</h1>
         <ul>
             {% for book in books %}
                 <li>
-                     <a href="/book_detail/{{ book.id }}/"><h2>{{ book.title }}</h2></a>
+                    <a href="/book_detail/{{ book.id }}/"><h2>{{ book.title }}</h2></a>
                     <img src="/media/{{ book.cover }}" alt="{{ book.title }}" width="150">
                 </li>
             {% endfor %}
@@ -72,4 +72,3 @@
         </div>
 </body>
 </html>
-

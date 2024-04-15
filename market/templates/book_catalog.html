@@ -11,6 +11,12 @@
             background-color: #DBAFA0;
             padding: 20px;
         }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 0;
+            color: #704264;
+        }
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -117,12 +123,14 @@
     </style>
 </head>
 <body>
+    <h1>Catalog of Books</h1>
     <div class="container">
         {% for book in books %}
         <div class="book">
             <img src="/media/{{ book.cover }}" alt="{{ book.title }}">
             <a href="/book_detail/{{ book.id }}/"><h2>{{ book.title }}</h2></a>
-            <p><strong>Author:</strong> {{ book.author }}</p>
+            <p><strong>Author:</strong> <a href="{% url 'filtered_authors' %}?author_id={{ book.author.id }}">{{ book.author }}</a></p>
+
        
             <div class = "categories"> 
                 <p><strong>Categories:</strong>
