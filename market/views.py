@@ -9,7 +9,7 @@ def home(request):
 
 
 def get_books(request):
-    book_list = Book.objects.all().filter(stock__gt=0).order_by('title')
+    book_list = Book.objects.filter(stock__gt=0).order_by('title')
     paginator = Paginator(book_list, 3)
 
     page_number = request.GET.get('page')
@@ -34,7 +34,7 @@ def filtered_books(request):
     books = Book.objects.all()
 
     if category_id:
-        selected_category = Category.objects.get(pk=category_id)
+        selected_category = get_object_or_404(Category, pk=category_id)
         books = books.filter(categories=selected_category)
 
     return render(request, 'filtered_books.html', {'books': books, 'selected_category': selected_category})
@@ -47,7 +47,7 @@ def filtered_authors(request):
     authors = Author.objects.all()
 
     if author_id:
-        selected_author = Author.objects.get(pk=author_id)
+        selected_author = get_object_or_404(Author, pk=author_id)
         books = books.filter(author=selected_author)
 
     return render(request, 'filtered_authors.html', {'books': books, 'selected_author': selected_author, 'authors': authors})

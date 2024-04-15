@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext as _
+from market.choices import cover_types
 
 
 # Create your models here.
@@ -31,17 +32,16 @@ class Category(models.Model):
 
 
 class Book(models.Model):
-    title = models.CharField(verbose_name=_("Title"), max_length=100)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name=_("Author"), related_name='books')
     categories = models.ManyToManyField(Category, verbose_name=_("Categories"))
+    title = models.CharField(verbose_name=_("Title"), max_length=100)
     description = models.TextField(verbose_name=_("Description"))
     best_seller = models.BooleanField(verbose_name=_("Best Seller"), default=False)
     age_group = models.CharField(verbose_name=_("Age Group"), max_length=50)
     price = models.DecimalField(verbose_name=_("Price"), max_digits=5, decimal_places=2)
     stock = models.IntegerField(verbose_name=_("Stock"))
     cover_type = models.CharField(verbose_name=_("Cover Type"),
-                                  choices=[("hard", "მყარი ყდა"), ("soft", "რბილი ყდა"),
-                                           ("special", "სპეციალური გამოცემა")],
+                                  choices=cover_types,
                                   max_length=30, default="soft", null=True)
 
     cover = models.ImageField(verbose_name=_("Cover"), upload_to='covers/', null=True, blank=True)
