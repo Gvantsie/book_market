@@ -104,26 +104,26 @@ delete books, Authors and Categories from the catalog or manage other site conte
 The `home page` displays a welcome message and a link to the book listing view.
 By pressing the `Browse Books` button, you will be redirected to the book catalog view.
 My projects interface looks like this:   
-![img.png](media/img.png)
+![img.png](media/presentation_images/img.png)
 
 ### Catalog Page
 The `catalog page` displays a list of all books in the catalog. Each book is displayed with its title, 
 author, and cover image.
 You can click on a book to view its detail page.
-![img.png](media/img1.png)
+![img.png](media/presentation_images/img1.png)
 
 ### Book Detail Page
 The `book detail page` displays detailed information about a single book. The page includes the book's title, author, 
 description, price, and stock. You can also view the book's cover image.
-![img.png](media/img2.png)
+![img.png](media/presentation_images/img2.png)
 
 ### Filtered Books Page
 The `filtered books page` displays a list of books filtered by category. The page includes a list of books that match the selected category.   
-![img.png](media/img4.png)
+![img.png](media/presentation_images/img4.png)
 
 ### Filtered Authors Page
 The `filtered authors page` displays a list of books filtered by author. The page includes a list of books that match the selected author.
-![img.png](media/img3.png)
+![img.png](media/presentation_images/img3.png)
 
 ### Endpoints
 The app provides endpoints:
