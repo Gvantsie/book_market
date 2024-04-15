@@ -40,10 +40,8 @@ class Book(models.Model):
     age_group = models.CharField(verbose_name=_("Age Group"), max_length=50)
     price = models.DecimalField(verbose_name=_("Price"), max_digits=5, decimal_places=2)
     stock = models.IntegerField(verbose_name=_("Stock"))
-    cover_type = models.CharField(verbose_name=_("Cover Type"),
-                                  choices=cover_types,
-                                  max_length=30, default="soft", null=True)
-
+    cover_type = models.CharField(verbose_name=_("Cover Type"), choices=cover_types, max_length=30,
+                                  default="soft", null=True)
     cover = models.ImageField(verbose_name=_("Cover"), upload_to='covers/', null=True, blank=True)
 
     def __str__(self):
