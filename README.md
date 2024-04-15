@@ -117,9 +117,11 @@ The `book detail page` displays detailed information about a single book. The pa
 description, price, and stock. You can also view the book's cover image.
 ![img.png](media/presentation_images/img2.png)
 
+
 ### Filtered Books Page
 The `filtered books page` displays a list of books filtered by category. The page includes a list of books that match the selected category.   
 ![img.png](media/presentation_images/img4.png)
+
 
 ### Filtered Authors Page
 The `filtered authors page` displays a list of books filtered by author. The page includes a list of books that match the selected author.
