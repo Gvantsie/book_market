@@ -22,8 +22,6 @@ __pycache__
 # Static files
 /staticfiles/
 
-# media files
-/media/
 
 # Database files
 *.sqlite3
