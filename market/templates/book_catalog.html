@@ -11,12 +11,14 @@
             background-color: #DBAFA0;
             padding: 20px;
         }
+
         h1 {
             text-align: center;
             margin-bottom: 20px;
             margin-top: 0;
             color: #704264;
         }
+
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -27,6 +29,7 @@
             box-sizing: border-box;
             margin-bottom: 20px;
         }
+
         .book {
             flex: 1 1 calc(33% - 20px);
             max-width: calc(33% - 20px);
@@ -38,12 +41,25 @@
             box-sizing: border-box;
             margin-bottom: 20px;
         }
+
         a {
             flex-wrap: wrap;
         }
-        .book:nth-child(3n) {
-            margin-right: 25px;
+
+        @media (max-width: 768px) {
+            .book {
+                flex: 1 1 calc(50% - 20px); /* Adjust width for smaller screens */
+                max-width: calc(50% - 20px);
+            }
         }
+
+        @media (max-width: 480px) {
+            .book {
+                flex: 1 1 100%; /* Full width on small screens */
+                max-width: 100%;
+            }
+        }
+
         .book img {
             max-width: 100%;
             max-height: 280px;
@@ -51,6 +67,7 @@
             border-radius: 5px;
             margin-bottom: 10px;
         }
+
         .book h2 {
             margin-top: 0;
             font-size: 18px;
@@ -59,17 +76,21 @@
             text-decoration: none;
             padding-bottom: 10px;
         }
+
         .book h2:hover {
             color: #704264;
         }
+
         .book p {
             margin: 5px 0;
             display: flex;
             justify-content: left;
         }
+
         .book p strong {
             margin-right: 5px;
         }
+
         .categories {
             margin-right: 10px;
             display: flex;
@@ -77,17 +98,21 @@
             justify-content: left;
             max-width: 100%;
         }
+
         .categories p {
             display: inline-block;
         }
+
         .home-button {
             margin-top: 20px;
             text-align: center;
         }
+
         .pagination {
             text-align: center;
             margin-top: 20px;
         }
+
         .pagination a {
             display: inline-block;
             padding: 5px 10px;
@@ -97,22 +122,27 @@
             text-decoration: none;
             border-radius: 5px;
         }
+
         .pagination a:hover {
             background-color: #704264;
         }
+
         .pagination .current {
             font-weight: bold;
         }
+
         .admin-button {
             float: left;
             margin-top: 20px;
             margin-left: 20px;
         }
+
         .home-button {
             float: right;
             margin-top: 20px;
             margin-right: 20px;
         }
+
         .admin-button a,
         .home-button a {
             padding: 10px 20px;
@@ -121,6 +151,7 @@
             text-decoration: none;
             border-radius: 5px;
         }
+
         .admin-button a:hover,
         .home-button a:hover {
             background-color: #704264;
@@ -128,16 +159,17 @@
     </style>
 </head>
 <body>
-    <h1>Catalog of Books</h1>
-    <div class="container">
-        {% for book in books %}
+<h1>Catalog of Books</h1>
+<div class="container">
+    {% for book in books %}
         <div class="book">
             <img src="/media/{{ book.cover }}" alt="{{ book.title }}">
             <a href="/book_detail/{{ book.id }}/"><h2>{{ book.title }}</h2></a>
-            <p><strong>Author:</strong> <a href="{% url 'filtered_authors' %}?author_id={{ book.author.id }}">{{ book.author }}</a></p>
+            <p><strong>Author:</strong> <a
+                    href="{% url 'filtered_authors' %}?author_id={{ book.author.id }}">{{ book.author }}</a></p>
 
-       
-            <div class = "categories"> 
+
+            <div class="categories">
                 <p><strong>Categories:</strong>
                     {% for category in book.categories.all %}
                         <a href="{% url 'filtered_books' %}?category_id={{ category.id }}">{{ category.category_name }}</a>
@@ -147,24 +179,24 @@
                     {% endfor %}
                 </p>
             </div>
-                <p><strong>Best Seller:</strong> {% if book.best_seller %} Yes {% else %} No {% endif %}</p>
-                <p><strong>Price:</strong> ₾ {{ book.price }}</p>
+            <p><strong>Best Seller:</strong> {% if book.best_seller %} Yes {% else %} No {% endif %}</p>
+            <p><strong>Price:</strong> ₾ {{ book.price }}</p>
         </div>
-        {% endfor %}
-    </div>
+    {% endfor %}
+</div>
 
-    <!-- Go back to home page button -->
-    <div class="home-button">
-        <a href="/">Go back to home page</a>
-    </div>
+<!-- Go back to home page button -->
+<div class="home-button">
+    <a href="/">Go back to home page</a>
+</div>
 
-    <!-- Open Admin button -->
-    <div class="admin-button">
-        <a href="{% url 'admin:index' %}" target="_blank">Open Admin</a>
-    </div>
+<!-- Open Admin button -->
+<div class="admin-button">
+    <a href="{% url 'admin:index' %}" target="_blank">Open Admin</a>
+</div>
 
-    <!-- Pagination links -->
-    <div class="pagination">
+<!-- Pagination links -->
+<div class="pagination">
         <span class="step-links">
             {% if books.has_previous %}
                 <a href="?page=1">&laquo; First</a>
@@ -180,7 +212,7 @@
                 <a href="?page={{ books.paginator.num_pages }}">Last &raquo;</a>
             {% endif %}
         </span>
-    </div>
+</div>
 </body>
 </html>
 
