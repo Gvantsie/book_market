@@ -1,61 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books by Author</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            color: #49243E;
-            background-color: #DBAFA0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #BB8493;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
-        }
-        h1 {
-            text-align: center;
-            color: #704264;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            text-align: center;
-            margin-top: 40px;
-        }
-        li {
-            margin-bottom: 20px;
-        }
-        img {
-            display: block;
-            margin: 0 auto;
-            border-radius: 5px;
-        }
-        .back-to-catalog {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .back-to-catalog a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #BB8493;
-            color: #FFF;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .back-to-catalog a:hover {
-            background-color: #704264;
-        }
-    </style>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}
+    Filtered Books by Author
+{% endblock %}
+
+{% block style %}
+    body {
+    font-family: Arial, sans-serif;
+    color: #49243E;
+    background-color: #DBAFA0;
+    padding: 20px;
+    }
+    .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #BB8493;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    }
+    h1 {
+    text-align: center;
+    color: #704264;
+    }
+    ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    margin-top: 40px;
+    }
+    li {
+    margin-bottom: 20px;
+    }
+    img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+    }
+    .back-to-catalog {
+    text-align: center;
+    margin-top: 20px;
+    }
+    .back-to-catalog a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #BB8493;
+    color: #FFF;
+    text-decoration: none;
+    border-radius: 5px;
+    }
+    .back-to-catalog a:hover {
+    background-color: #704264;
+    }
+{% endblock %}
+
+{% block body %}
     <div class="container">
         <h1>Books by Author: {{ selected_author.first_name }} {{ selected_author.last_name }}</h1>
         <ul>
@@ -66,9 +65,8 @@
                 </li>
             {% endfor %}
         </ul>
-        </div>
+    </div>
     <div class="back-to-catalog">
         <a href="{% url 'get_books' %}">Back to Catalog</a>
-        </div>
-</body>
-</html>
+    </div>
+{% endblock %}

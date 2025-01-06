@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books by Category</title>
-    <style>
+{% extends 'base.html' %}
+{% block title %}
+    Filtered Books in Category
+{% endblock %}
+{%  block style %}
         body {
             font-family: Arial, sans-serif;
             color: #49243E;
@@ -53,9 +51,9 @@
         .back-to-catalog a:hover {
             background-color: #704264;
         }
-    </style>
-</head>
-<body>
+{% endblock %}
+
+{% block body %}
     <div class="container">
         <h1>Books in Category: {{ selected_category.category_name }}</h1>
         <ul>
@@ -70,6 +68,4 @@
     <div class="back-to-catalog">
         <a href="{% url 'get_books' %}">Back to Catalog</a>
         </div>
-</body>
-</html>
-
+{% endblock %}

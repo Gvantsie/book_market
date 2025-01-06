@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ book.title }}</title>
-    <style>
+{% extends 'base.html' %}
+{% block title %}
+    Details for {{ book.title }}
+{% endblock %}
+{% block style %}
         body {
             font-family: Arial, sans-serif;
             color: #49243E;
@@ -52,9 +50,10 @@
             background-color: #704264;
         }
         
-    </style>
-</head>
-<body>
+{% endblock %}
+
+
+{% block body %}
     <div class="container">
         <div class="book-details">
             <h2>{{ book.title }}</h2>
@@ -79,5 +78,4 @@
     <div class="back-to-catalog">
         <a href="{% url 'get_books' %}">Back to Catalog</a>
     </div>
-</body>
-</html>
+{% endblock %}
