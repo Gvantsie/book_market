@@ -2,78 +2,46 @@
 {% block title %}
     Details for {{ book.title }}
 {% endblock %}
-{% block style %}
-        body {
-            font-family: Arial, sans-serif;
-            color: #49243E;
-            background-color: #DBAFA0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #BB8493;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
-        }
-        .book-details {
-            margin-bottom: 20px;
-        }
-        .book-details h2 {
-            margin-top: 0;
-            color: #704264;
-        }
-        .book-details p {
-            margin: 5px 0;
-        }
-        .book-cover {
-            max-width: 100%;
-            max-height: 300px;
-            height: auto;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-        .back-to-catalog {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .back-to-catalog a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #BB8493;
-            color: #FFF;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .back-to-catalog a:hover {
-            background-color: #704264;
-        }
-        
-{% endblock %}
-
 
 {% block body %}
-    <div class="container">
-        <div class="book-details">
-            <h2>{{ book.title }}</h2>
-            <img class="book-cover" src="/media/{{ book.cover }}" alt=" ">
-            <p><strong>Author:</strong> {{ book.author }}</p>
-            <p><strong>Description:</strong> {{ book.description }}</p>
-            <p><strong>Best Seller:</strong> {% if book.best_seller %} Yes {% else %} No {% endif %}</p>
-            <p><strong>Age Group:</strong> {{ book.age_group }}</p>
-            <p><strong>Categories:</strong>
-                {% for category in book.categories.all %}
-                    <a href="{% url 'filtered_books' %}?category_id={{ category.id }}">{{ category.category_name }}</a>
-                    {% if not forloop.last %}, {% endif %}
-                {% empty %}
-                    No categories
-                {% endfor %}
-            </p>
-            <p><strong>Price:</strong> ₾ {{ book.price }}</p>
-            <p><strong>Stock:</strong> {{ book.stock }}</p>
+    <div class="book-details">
+        <div class="card m-2" style="max-width: 100%;" id="detailed_book">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="/media/{{ book.cover }}" class="img-fluid rounded-start fill-left" alt="{{ book.title }}">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ book.title }}</h4>
+                        <p><strong>{{ book.author }}</strong></p>
+                        <hr>
+                        <p class="card-text">{{ book.description }}</p>
+                        <p class="card-text">Last updated 3 mins ago</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+
+
+    {#        <h2>{{ book.title }}</h2>#}
+    {#        <img class="book-cover" src="/media/{{ book.cover }}" alt=" ">#}
+    {#        <p><strong>Author:</strong> {{ book.author }}</p>#}
+    {#        <p><strong>Description:</strong> {{ book.description }}</p>#}
+    {#        <p><strong>Best Seller:</strong> {% if book.best_seller %} Yes {% else %} No {% endif %}</p>#}
+    {#        <p><strong>Age Group:</strong> {{ book.age_group }}</p>#}
+    {#        <p><strong>Categories:</strong>#}
+    {#            {% for category in book.categories.all %}#}
+    {#                <a href="{% url 'filtered_books' %}?category_id={{ category.id }}">{{ category.category_name }}</a>#}
+    {#                {% if not forloop.last %}, {% endif %}#}
+    {#            {% empty %}#}
+    {#                No categories#}
+    {#            {% endfor %}#}
+    {#        </p>#}
+    {#        <p><strong>Price:</strong> ₾ {{ book.price }}</p>#}
+    {#        <p><strong>Stock:</strong> {{ book.stock }}</p>#}
+    {#    </div>#}
     <!-- Back to Catalog button -->
     <div class="back-to-catalog">
         <a href="{% url 'get_books' %}">Back to Catalog</a>
