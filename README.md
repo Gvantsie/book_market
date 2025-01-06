@@ -21,6 +21,9 @@ python manage.py runserver
 ```
 The application should now be accessible at http://127.0.0.1:8000/.
 
+#### or if you prefer user experience you can use deployed project link below
+`https://book-market-gavd.onrender.com/`
+
 ### Market App
 The market app is responsible for managing the book catalog in the Bookstore project.
 
