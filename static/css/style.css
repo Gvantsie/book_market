@@ -10,7 +10,6 @@ h1 {
     text-align: center;
     margin-bottom: 10px;
     margin-top: 10px;
-    color: #704264; !important;
 }
 
 .container {
@@ -28,6 +27,29 @@ a {
     flex-wrap: wrap;
 }
 
+.back-to-catalog{
+    margin-top: 10px;
+}
+.back-to-catalog a{
+    text-decoration: none;
+    color: #1e282d !important;
+}
+.filtered-books h2{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #4f6b79 !important;
+}
+.filtered-books h4{
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+    color: #3a4f59 !important;
+}
+.filtered-books a{
+    text-decoration: none;
+}
 .card {
     background-color: white !important;
     border-radius: 5px;

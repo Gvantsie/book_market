@@ -16,34 +16,26 @@
                         <p><strong>{{ book.author }}</strong></p>
                         <hr>
                         <p class="card-text">{{ book.description }}</p>
-                        <p class="card-text">Last updated 3 mins ago</p>
+                        <p><strong>Best Seller:</strong> {% if book.best_seller %} Yes {% else %} No {% endif %}</p>
+                        <p><strong>Age Group:</strong> {{ book.age_group }}</p>
+                        <p><strong>Categories:</strong>
+                            {% for category in book.categories.all %}
+                                <a href="{% url 'filtered_books' %}?category_id={{ category.id }}">{{ category.category_name }}</a>
+                                {% if not forloop.last %}, {% endif %}
+                            {% empty %}
+                                No categories
+                            {% endfor %}
+                        </p>
+                        <p><strong>Price:</strong> ₾ {{ book.price }}</p>
+                        <p><strong>Stock:</strong> {{ book.stock }}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-
-
-    {#        <h2>{{ book.title }}</h2>#}
-    {#        <img class="book-cover" src="/media/{{ book.cover }}" alt=" ">#}
-    {#        <p><strong>Author:</strong> {{ book.author }}</p>#}
-    {#        <p><strong>Description:</strong> {{ book.description }}</p>#}
-    {#        <p><strong>Best Seller:</strong> {% if book.best_seller %} Yes {% else %} No {% endif %}</p>#}
-    {#        <p><strong>Age Group:</strong> {{ book.age_group }}</p>#}
-    {#        <p><strong>Categories:</strong>#}
-    {#            {% for category in book.categories.all %}#}
-    {#                <a href="{% url 'filtered_books' %}?category_id={{ category.id }}">{{ category.category_name }}</a>#}
-    {#                {% if not forloop.last %}, {% endif %}#}
-    {#            {% empty %}#}
-    {#                No categories#}
-    {#            {% endfor %}#}
-    {#        </p>#}
-    {#        <p><strong>Price:</strong> ₾ {{ book.price }}</p>#}
-    {#        <p><strong>Stock:</strong> {{ book.stock }}</p>#}
-    {#    </div>#}
     <!-- Back to Catalog button -->
-    <div class="back-to-catalog">
+    <div class="btn btn-outline-secondary back-to-catalog">
         <a href="{% url 'get_books' %}">Back to Catalog</a>
     </div>
 {% endblock %}
