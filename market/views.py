@@ -10,7 +10,7 @@ def home(request):
 
 def get_books(request):
     book_list = Book.objects.filter(stock__gt=0).order_by('title')
-    paginator = Paginator(book_list, 3)
+    paginator = Paginator(book_list, 4)
 
     page_number = request.GET.get('page')
     try:
