@@ -88,3 +88,7 @@ li.pagination .current {
 .bg-custom {
     background-color: #4f6b79;
 }
+
+.carousel img {
+    margin-top: 10px;
+}
