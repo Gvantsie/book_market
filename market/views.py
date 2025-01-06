@@ -4,10 +4,6 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # Create your views here.
-def home(request):
-    return render(request, 'home.html')
-
-
 def get_books(request):
     book_list = Book.objects.filter(stock__gt=0).order_by('title')
     paginator = Paginator(book_list, 4)
