@@ -12,4 +12,5 @@ urlpatterns = [
     path('filtered_authors/', filtered_authors, name='filtered_authors'),
     path('register/', views.create_user, name='create_user'),
     path('login/', views.login_, name='login_'),
+    path('logout/', views.logout_view, name='logout_'),
 ]

@@ -81,7 +81,8 @@ def login_(request):
 
     return render(request, 'login.html', {'form': form})
 
+
 def logout_view(request):
     logout(request)
     messages.info(request, 'You have been logged out.')
-    return redirect('login')
+    return redirect('login_')
