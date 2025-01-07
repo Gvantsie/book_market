@@ -1,9 +1,16 @@
+import json
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils.decorators import method_decorator
+from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 
 from market.forms import UserRegistrationForm, LoginForm
-from market.models import Book, Category, Author, User
+from market.models import Book, Category, Author, User, Wishlist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -86,3 +93,46 @@ def logout_view(request):
     logout(request)
     messages.info(request, 'You have been logged out.')
     return redirect('login_')
+
+
+@csrf_exempt  # This is only for testing, you should handle CSRF tokens properly in production
+@login_required
+def toggle_wishlist(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            print(data)  # Add this to see the content of the request
+            book_id = data.get("book_id")
+            book = get_object_or_404(Book, pk=book_id)
+            user = request.user
+            wishlist, created = Wishlist.objects.get_or_create(user=user, book=book)
+            if not created:
+                wishlist.delete()
+                return JsonResponse({"message": "Book removed from wishlist"})
+            return JsonResponse({"message": "Book added to wishlist"})
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+
+    return JsonResponse({"error": "Invalid request method"}, status=405)
+
+
+def wishlist_view(request):
+    # Get the wishlist of the current logged-in user
+    wishlist_items = Wishlist.objects.filter(user=request.user)
+    books_in_wishlist = [item.book for item in wishlist_items]  # Get the books from the wishlist items
+    books = Book.objects.all()
+
+    return render(request, 'wishlist.html', {
+        'books_in_wishlist': books_in_wishlist,
+        'books': books
+    })
+
+
+def remove_from_wishlist(request, book_id):
+    book = get_object_or_404(Book, pk=book_id)
+    wishlist = Wishlist.objects.filter(user=request.user, book=book).first()  # Get the wishlist item for the specific book
+    if wishlist:
+        wishlist.delete()  # Delete the wishlist entry
+    return redirect('wishlist')  # Redirect to the wishlist page
+
+

@@ -24,6 +24,13 @@
                         <li><a class="dropdown-item" href="#">Poems</a></li>
                     </ul>
                 </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a type="button" class="btn btn-outline-dark" href="/wishlist/">
+                            Wishlist
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -37,7 +44,8 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/logout/">Log out</a></li>
-                    </ul>
+
+
                 </div>
             {% else %}
                 <div class="btn-group">

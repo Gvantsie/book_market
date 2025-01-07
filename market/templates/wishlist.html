@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Your Wishlist{% endblock %}
+
+{% block body %}
+    <div class="row ">
+        <div class="wishlist col-md shadow p-3 mb-5 bg-body-tertiary rounded">
+            <h1>Your Wishlist</h1>
+            {% if books_in_wishlist %}
+                <div class="row">
+                    {% for book in books_in_wishlist %}
+                        <div class="col-md-4 mb-3" style="width: 15rem;">
+                            <div class="card h-100">
+                                <img src="/media/{{ book.cover }}" class="card-img-top" alt="{{ book.title }}">
+                                <div class="card-body">
+                                    <h5><a href="/book_detail/{{ book.id }}/" class="card-title">{{ book.title }}</a>
+                                    </h5>
+                                    <a href="{% url 'filtered_authors' %}?author_id={{ book.author.id }}">
+                                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ book.author }}</h6>
+                                    </a>
+                                    <p><strong>Price:</strong> ₾ {{ book.price }}</p>
+                                </div>
+                                <a href="{% url 'remove_from_wishlist' book.id %}"
+                                   class="btn btn-sm float-end custom-btn-outline-danger">Remove</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Your wishlist is empty. Add books to your wishlist!</p>
+            {% endif %}
+            <div class="btn btn-outline-secondary back-to-catalog">
+                <a href="{% url 'get_books' %}">Back to Catalog</a>
+            </div>
+        </div>
+
+    </div>
+    
+<script>
+    // Pass the books in the wishlist to JavaScript
+    const booksInWishlist = {{ books_in_wishlist|safe }};
+</script>
+
+{% endblock %}
