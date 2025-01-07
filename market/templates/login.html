@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block body %}
+    <div class="row shadow p-3 mb-5 bg-body-tertiary rounded" style="width: 80%;">
+        <form method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+            <div class="row mb-3">
+                {{ form.non_field_errors }}
+            </div>
+            {% for field in form %}
+                <div class="row mb-3 align-content-center">
+                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="invalid-feedback">
+                            {{ field.errors|striptags }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+    </div>
+{% endblock %}

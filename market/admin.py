@@ -35,3 +35,4 @@ class WishListAdmin(admin.ModelAdmin):
     list_display = ('user', 'book')
     list_filter = ('user', 'book')
     search_fields = ('user', 'book')
+

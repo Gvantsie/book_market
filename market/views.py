@@ -1,5 +1,9 @@
-from django.shortcuts import render, get_object_or_404
-from market.models import Book, Category, Author
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, get_object_or_404, redirect
+
+from market.forms import UserRegistrationForm, LoginForm
+from market.models import Book, Category, Author, User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -47,3 +51,37 @@ def filtered_authors(request):
         books = books.filter(author=selected_author)
 
     return render(request, 'filtered_authors.html', {'books': books, 'selected_author': selected_author, 'authors': authors})
+
+
+def create_user(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'User created successfully.')
+            return redirect('login_')
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'create_user.html', {'form': form})
+
+
+def login_(request):
+    if request.method == 'POST':
+        form = LoginForm(request, data=request.POST)
+        if form.is_valid():
+            # Authenticate and login the user
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, 'Logged in successfully.')
+            return redirect('get_books')  # Redirect to home or another page after login
+        else:
+            messages.error(request, 'Invalid credentials, please try again.')
+    else:
+        form = LoginForm()
+
+    return render(request, 'login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    messages.info(request, 'You have been logged out.')
+    return redirect('login')

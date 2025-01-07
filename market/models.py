@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext as _
 from market.choices import cover_types
@@ -53,9 +54,10 @@ class Book(models.Model):
         verbose_name_plural = _("Books")
 
 
-class User(models.Model):
+class User(AbstractUser):
     first_name = models.CharField(verbose_name=_("First Name"), max_length=100)
     last_name = models.CharField(verbose_name=_("Last Name"), max_length=255)
+    username = models.CharField(verbose_name=_("Username"), max_length=255, unique=True, null=False)
     email = models.EmailField(verbose_name=_("Email"), max_length=255)
     password = models.CharField(verbose_name=_("Password"), max_length=255)
 

@@ -29,6 +29,28 @@
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-dark" type="submit">Search</button>
             </form>
+            {% if user.is_authenticated %}
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        {{ user.username }}
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/logout/">Log out</a></li>
+                    </ul>
+                </div>
+            {% else %}
+                <div class="btn-group">
+                <button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    Account
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/login/">Log in</a></li>
+                    <li><a class="dropdown-item" href="/register/">Register</a></li>
+                </ul>
+            {% endif %}
+            </div>
         </div>
     </div>
 </nav>
