@@ -51,3 +51,31 @@ class Book(models.Model):
         ordering = ['best_seller', 'title']
         verbose_name = _("Book")
         verbose_name_plural = _("Books")
+
+
+class User(models.Model):
+    first_name = models.CharField(verbose_name=_("First Name"), max_length=100)
+    last_name = models.CharField(verbose_name=_("Last Name"), max_length=255)
+    email = models.EmailField(verbose_name=_("Email"), max_length=255)
+    password = models.CharField(verbose_name=_("Password"), max_length=255)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
+    class Meta:
+        ordering = ['last_name', 'first_name']
+        verbose_name = _("User")
+        verbose_name_plural = _("Users")
+
+
+class Wishlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("User"), related_name='wishlists')
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name=_("Book"), related_name='wishlists')
+
+    def __str__(self):
+        return f"{self.user} {self.book}"
+
+    class Meta:
+        verbose_name = _("Wishlist")
+        verbose_name_plural = _("Wishlists")
+        unique_together = ['user', 'book']

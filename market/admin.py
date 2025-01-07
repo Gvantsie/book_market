@@ -1,8 +1,5 @@
 from django.contrib import admin
-from market.models import Book
-from market.models import Author
-from market.models import Category
-
+from market.models import Book, Author, Category, User, Wishlist
 
 # Register your models here.
 @admin.register(Author)
@@ -25,3 +22,16 @@ class BookAdmin(admin.ModelAdmin):
     list_filter = ('title', 'author', 'best_seller', 'categories')
     search_fields = ('title', 'author', 'price', 'categories')
 
+
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'email', 'password')
+    list_filter = ('first_name', 'last_name', 'email', 'password')
+    search_fields = ('first_name', 'last_name', 'email', 'password')
+
+
+@admin.register(Wishlist)
+class WishListAdmin(admin.ModelAdmin):
+    list_display = ('user', 'book')
+    list_filter = ('user', 'book')
+    search_fields = ('user', 'book')
