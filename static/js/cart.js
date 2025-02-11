@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Cart JS loaded!"); // Debugging
+    console.log("Cart JS loaded"); // Debug log
 
     const cartButtons = document.querySelectorAll(".cart-btn");
-    console.log("Found cart buttons:", cartButtons.length); // Debugging
+    console.log("Found cart buttons:", cartButtons.length); // Debug log
 
     cartButtons.forEach(button => {
         button.addEventListener("click", function (event) {
             event.preventDefault();
-            console.log("Cart button clicked"); // Debugging
+            console.log("Cart button clicked"); // Debug log
 
             const bookId = this.getAttribute("data-book-id");
             if (!bookId) {
@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const icon = this.querySelector("i");
 
-            // Send AJAX request before updating UI
             fetch("/cart/toggle/", {
                 method: "POST",
                 headers: {
@@ -30,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 console.log("Response from server:", data);
 
-                // Only toggle the icon if the server request was successful
                 if (data.message) {
                     if (icon) {
                         if (icon.classList.contains("bi-cart")) {
@@ -51,7 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-
 // Function to get the value of a cookie
 function getCookie(name) {
     let cookieValue = null;

@@ -172,3 +172,11 @@ li.pagination .current {
     background-color: rgba(206, 15, 15, 0.92) !important;
     color: white !important;
 }
+
+.cart-btn-active {
+    color: #198754; /* or any color you prefer */
+}
+
+.cart-btn:hover {
+    color: #198754;
+}

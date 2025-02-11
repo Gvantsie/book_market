@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 from django.contrib import admin
-from .views import filtered_books, filtered_authors, toggle_wishlist
+from .views import filtered_books, filtered_authors
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -17,4 +17,6 @@ urlpatterns = [
     path("wishlist/toggle/", views.toggle_wishlist, name="toggle_wishlist"),
     path('wishlist/', views.wishlist_view, name='wishlist'),
     path('wishlist/remove/<int:book_id>/', views.remove_from_wishlist, name='remove_from_wishlist'),
+    path('cart/toggle/', views.toggle_cart, name='toggle_cart'),
+    path('cart/', views.cart_view, name='cart'),
 ]

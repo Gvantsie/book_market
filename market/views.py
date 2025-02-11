@@ -10,7 +10,7 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
 from market.forms import UserRegistrationForm, LoginForm
-from market.models import Book, Category, Author, User, Wishlist
+from market.models import Book, Category, Author, User, Wishlist, Cart
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -20,8 +20,10 @@ def get_books(request):
     paginator = Paginator(book_list, 4)
 
     books_in_wishlist = []
+    books_in_cart = []
     if request.user.is_authenticated:
         books_in_wishlist = Wishlist.objects.filter(user=request.user).values_list('book_id', flat=True)
+        books_in_cart = Cart.objects.filter(user=request.user).values_list('book_id', flat=True)
 
     page_number = request.GET.get('page')
     try:
@@ -34,6 +36,7 @@ def get_books(request):
     context = {
         'books': books,
         'books_in_wishlist': list(books_in_wishlist),
+        'books_in_cart': list(books_in_cart),
     }
 
     return render(request, 'book_catalog.html', context)
@@ -105,7 +108,6 @@ def logout_view(request):
     return redirect('login_')
 
 
-@csrf_exempt  # This is only for testing, you should handle CSRF tokens properly in production
 @login_required
 def toggle_wishlist(request):
     if request.method == "POST":
@@ -145,3 +147,34 @@ def remove_from_wishlist(request, book_id):
     if wishlist:
         wishlist.delete()  # Delete the wishlist entry
     return redirect('wishlist')  # Redirect to the wishlist page
+
+
+@login_required
+def toggle_cart(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            book_id = data.get("book_id")
+            book = get_object_or_404(Book, pk=book_id)
+            user = request.user
+
+            cart_item, created = Cart.objects.get_or_create(user=user, book=book)
+            if not created:
+                cart_item.delete()
+                return JsonResponse({"message": "Book removed from cart"})
+            return JsonResponse({"message": "Book added to cart"})
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+
+    return JsonResponse({"error": "Invalid request method"}, status=405)
+
+
+def cart_view(request):
+    cart_items = Cart.objects.filter(user=request.user)
+    books_in_cart = [item.book for item in cart_items]
+    books = Book.objects.all()
+
+    return render(request, 'cart.html', {
+        'books_in_cart': books_in_cart,
+        'books': books
+    })

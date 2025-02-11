@@ -81,3 +81,15 @@ class Wishlist(models.Model):
         verbose_name = _("Wishlist")
         verbose_name_plural = _("Wishlists")
         unique_together = ['user', 'book']
+
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("User"), related_name='carts')
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name=_("Book"), related_name='carts')
+    quantity = models.PositiveIntegerField(default=1, verbose_name=_("Quantity"))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
+
+    class Meta:
+        verbose_name = _("Cart")
+        verbose_name_plural = _("Carts")
+        unique_together = ('user', 'book')
