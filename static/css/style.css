@@ -152,7 +152,10 @@ li.pagination .current {
 .wishlist-btn i.bi-heart-fill {
     color: #c40606;
 }
-
+.wishlist-btn-active {
+    /* Add any specific styles for the active state */
+    color: #c40606; /* or whatever color you want for the active state */
+}
 .wishlist h1 {
     text-align: center;
     margin-top: 10px;

@@ -19,6 +19,10 @@ def get_books(request):
     book_list = Book.objects.filter(stock__gt=0).order_by('title')
     paginator = Paginator(book_list, 4)
 
+    books_in_wishlist = []
+    if request.user.is_authenticated:
+        books_in_wishlist = Wishlist.objects.filter(user=request.user).values_list('book_id', flat=True)
+
     page_number = request.GET.get('page')
     try:
         books = paginator.page(page_number)
@@ -27,7 +31,12 @@ def get_books(request):
     except EmptyPage:
         books = paginator.page(paginator.num_pages)
 
-    return render(request, 'book_catalog.html', {'books': books})
+    context = {
+        'books': books,
+        'books_in_wishlist': list(books_in_wishlist),
+    }
+
+    return render(request, 'book_catalog.html', context)
 
 
 def book_detail(request, book_id):
@@ -57,7 +66,8 @@ def filtered_authors(request):
         selected_author = get_object_or_404(Author, pk=author_id)
         books = books.filter(author=selected_author)
 
-    return render(request, 'filtered_authors.html', {'books': books, 'selected_author': selected_author, 'authors': authors})
+    return render(request, 'filtered_authors.html',
+                  {'books': books, 'selected_author': selected_author, 'authors': authors})
 
 
 def create_user(request):
@@ -130,9 +140,8 @@ def wishlist_view(request):
 
 def remove_from_wishlist(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
-    wishlist = Wishlist.objects.filter(user=request.user, book=book).first()  # Get the wishlist item for the specific book
+    wishlist = Wishlist.objects.filter(user=request.user,
+                                       book=book).first()  # Get the wishlist item for the specific book
     if wishlist:
         wishlist.delete()  # Delete the wishlist entry
     return redirect('wishlist')  # Redirect to the wishlist page
-
-

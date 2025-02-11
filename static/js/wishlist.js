@@ -1,11 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     const wishlistButtons = document.querySelectorAll(".wishlist-btn");
 
-
     wishlistButtons.forEach(button => {
         button.addEventListener("click", function (event) {
             event.preventDefault();
-            console.log("Wishlist button clicked!");  // Add this log for debugging
 
             const bookId = this.getAttribute("data-book-id");
             if (!bookId) {
@@ -14,17 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             const icon = this.querySelector("i");
-            if (icon) {
-                if (icon.classList.contains("bi-heart")) {
-                    icon.classList.remove("bi-heart");
-                    icon.classList.add("bi-heart-fill");
-                } else {
-                    icon.classList.remove("bi-heart-fill");
-                    icon.classList.add("bi-heart");
-                }
-            }
 
-            // Send AJAX request
+            // Send AJAX request before updating UI
             fetch("/wishlist/toggle/", {
                 method: "POST",
                 headers: {
@@ -33,13 +22,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 body: JSON.stringify({ book_id: bookId }),
             })
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Response from server:", data);
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                });
+            .then(response => response.json())
+            .then(data => {
+                console.log("Response from server:", data);
+
+                // Only toggle the icon if the server request was successful
+                if (data.message) {
+                    if (icon) {
+                        if (icon.classList.contains("bi-heart")) {
+                            icon.classList.remove("bi-heart");
+                            icon.classList.add("bi-heart-fill");
+                            button.classList.add("wishlist-btn-active");
+                        } else {
+                            icon.classList.remove("bi-heart-fill");
+                            icon.classList.add("bi-heart");
+                            button.classList.remove("wishlist-btn-active");
+                        }
+                    }
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
         });
     });
 });
